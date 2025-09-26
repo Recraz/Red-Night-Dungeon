@@ -1,0 +1,59 @@
+[gd_scene load_steps=6 format=3 uid="uid://b8ll5mqwvhcsk"]
+
+[ext_resource type="Script" uid="uid://b8mtl6ijaj2t6" path="res://player/skills/basic/slash/slash.gd" id="1_ch045"]
+[ext_resource type="Texture2D" uid="uid://db7b228riegol" path="res://player/skills/basic/slash/SKILL_slash.png" id="2_uk5hn"]
+
+[sub_resource type="Animation" id="Animation_1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_2"]
+resource_name = "slash"
+length = 0.36
+step = 0.04
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.03, 0.06, 0.09, 0.12, 0.15, 0.2, 0.24, 0.28, 0.32, 0.36),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1"]
+_data = {
+&"RESET": SubResource("Animation_1"),
+&"slash": SubResource("Animation_2")
+}
+
+[node name="Slash" type="Node2D"]
+script = ExtResource("1_ch045")
+skill_duration = 0.36
+cooldown_time = 0.0
+offset_distance = 12.0
+animation_direction = "cursor_direction"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5708
+texture = ExtResource("2_uk5hn")
+hframes = 11
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_1")
+}
